@@ -1,24 +1,59 @@
 
 import './App.css';
 
-import React, { PropTypes } from 'react'
+import React from 'react'
 import {Alicia} from './Alicia/Alicia';
 import {Bruce} from './Bruce/Bruce';
 //import {Clarence} from './Clarence/Clarence';
-import {Routes, Route } from 'react-router-dom';
+import {Routes, useNavigate, Route } from 'react-router-dom';
+
 //This function define the endpoints at which requests can be made
 export const App = () => {
+
+  const navigate = useNavigate();
+  const redirectToAliciaPage = () => {
+    //Redirect to the Alicia page
+    navigate("/Alicia");
+  };
+  const redirectToBrucePage = () => {
+    //Redirect to the Bruce page
+    navigate("/Bruce");
+  };
+  const redirectToHomePage = () => {
+    //Redirect to the Home page
+    navigate("/");
+  };
    return(
    <div>
        <h1>Home page</h1>
+
+       <button
+          onClick={redirectToAliciaPage}
+          style={{ backgroundColor: "red", color: "white" }}>
+          Alicia
+       </button>
+      
+        <button
+          onClick={redirectToBrucePage}
+          style={{ backgroundColor: "red", color: "white" }}>
+          Bruce
+        </button>
+
+        <button
+          onClick={redirectToHomePage}
+          style={{ backgroundColor: "red", color: "white" }}>
+          Home
+        </button>
+
       <Routes>
          <Route path='/Alicia' element={<Alicia/>}/>
          <Route path='/Bruce' element={<Bruce/>}/>
+         <Route path='/' element={<App />}/>
       </Routes>
    </div>
    );
 }
-export default App;
+
 
 /*         <Route path='/Clarence' element={<Clarence/>}/>
 /*const App =() =>{
@@ -73,3 +108,5 @@ export default App;
   );
 }
 */
+
+export default App;
