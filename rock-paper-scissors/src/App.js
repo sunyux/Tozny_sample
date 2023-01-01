@@ -25,7 +25,7 @@ export const App = () => {
   };
    return(
    <div>
-       <h1>Home page</h1>
+       <h1>Rock✊-Paper✋-Scissors✌️</h1>
 
        <button
           onClick={redirectToAliciaPage}
@@ -48,7 +48,7 @@ export const App = () => {
       <Routes>
          <Route path='/Alicia' element={<Alicia/>}/>
          <Route path='/Bruce' element={<Bruce/>}/>
-         <Route path='/' element={<App />}/>
+         <Route path='/Home' element={<App/>}/>
       </Routes>
    </div>
    );
