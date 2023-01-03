@@ -14,8 +14,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-##Possible errors
+## Possible errors
+
 1." Module not found: Error: Can't resolve 'fs' in ..."
+
  Solution：
  Add 
 ```JavaScript
@@ -39,7 +41,9 @@ If you want to include a polyfill, you need to:
     - install 'path-browserify'
 If you don't want to include a polyfill, you can use an empty module like this:
     resolve.fallback: { "path": false }"
+
 Solution：
+
 Step1-Add 
 ```JavaScript
 resolve: {
@@ -59,3 +63,17 @@ in your terminal
 
 Step3-restart your server for the changes to take effect
 >when upgrading from webpack v4 to v5, need to clean up 
+
+I add 
+```fallback:{ 
+              crypto: require.resolve("crypto-browserify"),
+              stream: require.resolve("stream-browserify"),
+              path: require.resolve("path-browserify"),
+              http: require.resolve("stream-http"),
+              https: require.resolve("https-browserify"),
+              os: require.resolve("os-browserify/browser"),
+              fs: false,
+              buffer: require.resolve("buffer/"),
+              url: require.resolve("url/")
+          },
+``` in config.js

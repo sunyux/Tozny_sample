@@ -4,6 +4,7 @@ import './App.css';
 import React from 'react'
 import {Alicia} from './Alicia/Alicia';
 import {Bruce} from './Bruce/Bruce';
+import {Clarence} from './Clarence/Clarence';
 //import {Clarence} from './Clarence/Clarence';
 import {Routes, useNavigate, Route } from 'react-router-dom';
 
@@ -22,6 +23,10 @@ export const App = () => {
   const redirectToHomePage = () => {
     //Redirect to the Home page
     navigate("/");
+  };
+  const redirectToClarencePage = () => {
+      //Redirect to the Bruce page
+      navigate("/Clarence");
   };
    return(
    <div>
@@ -44,11 +49,17 @@ export const App = () => {
           style={{ backgroundColor: "red", color: "white" }}>
           Home
         </button>
+        <button
+          onClick={redirectToClarencePage}
+          style={{ backgroundColor: "red", color: "white" }}>
+          Clarence
+        </button>
 
       <Routes>
          <Route path='/Alicia' element={<Alicia/>}/>
          <Route path='/Bruce' element={<Bruce/>}/>
          <Route path='/Home' element={<App/>}/>
+         <Route path='/Clarence' element={<Clarence/>}/>
       </Routes>
    </div>
    );
