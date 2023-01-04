@@ -1,5 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Suspense,useState} from 'react';
 import Tozny from '@toznysecure/sdk/node'
+
 
 const config = Tozny.storage.Config.fromObject({
   "private_signing_key": "Vj4NcSB6kjoJvxtfy5lm21yVCIJrVozHrHOSHmv6eOdTKwtrAalPXIgYrqT4wTVWXf04qLqpayfi5vkCf-GM4Q",
@@ -13,46 +14,65 @@ const config = Tozny.storage.Config.fromObject({
   })
 
 const client = new Tozny.storage.Client(config)
-
-export const Clarencefunction = async (client) => {
+const setResult=('No Result, please check user enter the choice')
+const checkResult =(AliceChoice,BruceChoice) =>{
+  switch(AliceChoice + BruceChoice){
+    case'rockscissors':
+    case'paperrock':
+    case'scissorspaper':
+      return setResult('Alice Win!')
+    case'paperpaper':
+    case'scissorsscissors':
+    case'rockrock':
+      return setResult('Draw!')
+    case'scissorsrock':
+    case'rockpaper':
+    case'paperscissors':
+      return setResult('Bruce Win!')   
+  }
+}
+export const Clarencefunction = async (client,checkround) => {
     const request = new Tozny.types.Search(true, true, 10);
-    const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-    request.match({ type: 'Alicia' });
+    const AlciaChoice=request.match('Alicia',{round:checkround});
+    const BruceChoice=request.match('Bruce',{round:checkround});
   
     const resultQuery = await client.search(request);
     const found = await resultQuery.next();
   
-    const records = found.map((record) => (
-      <div key={record.meta.recordId}>
-        {record.data.first_name} plays {record.meta.plain.instrument}
-      </div>
-    ));
-  
-    return records;
+    for (let record of found) {
+      console.log(
+        `Found record ${record.meta.recordId}: ${record.data.round} plays ${record.data.choice}`
+      )
+    }
+    const result=checkResult(AlciaChoice,BruceChoice);
+    return result
   };
 
 const ClarenceResult = () => {
+  console.log('hi result')
   const result = Clarencefunction(client);
+
   console.log(result)
   return <div>{result}</div>;
 };
 
 export const Clarence= () =>{
+  const [ClarenceRound, setClarenceRound] =useState(null)
+  const ClarenceInput = event => {
+    setClarenceRound(event.target.value)
+  }
     return (
-
+     
       <Suspense fallback={<div>Loading...</div>}>
         <div>
         <h1> Welcome Clarence!</h1>
-        <button onClick={()=> <ClarenceResult />}>Juige</button>
+        <input onChange={ClarenceInput} placeholder="Enter number"/>
+        <button onClick={()=> ClarenceResult(ClarenceRound)}>Clarence</button>
     </div>
       </Suspense>
 
     );
   };
-  
-  
-  
   
   
   
