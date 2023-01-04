@@ -74,6 +74,12 @@ I add
               os: require.resolve("os-browserify/browser"),
               fs: false,
               buffer: require.resolve("buffer/"),
-              url: require.resolve("url/")
+              url: require.resolve("url/"),
+              util: require.resolve("util/"),
+              vm: require.resolve("vm-browserify"),
+              zlib: require.resolve("browserify-zlib"),
+               assert: require.resolve("assert/"),
           },
 ``` in config.js
+
+#The Clarence page still have some error, can't work
